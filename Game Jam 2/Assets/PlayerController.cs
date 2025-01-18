@@ -4,8 +4,6 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
     public float sensitivity = 2.0f;
-
-    private float rotationX = 0f;
     private Transform playerCamera;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,7 +24,6 @@ public class PlayerController : MonoBehaviour
 
         // --- Handle Mouse Look ---
         float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
         // Rotate the player horizontally (yaw)
         Vector3 playerRotation = transform.rotation.eulerAngles;
@@ -34,12 +31,5 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(playerRotation);
 
         Debug.Log("Player Yaw (Y-axis): " + transform.rotation.eulerAngles.y);
-
-        // Vertical rotation (pitch) applied to the camera
-        rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f); // Restrict pitch rotation
-        playerCamera.localRotation = Quaternion.Euler(rotationX, 0, 0);
-
-        Debug.Log("Camera Pitch (X-axis): " + rotationX);
     }
 }
